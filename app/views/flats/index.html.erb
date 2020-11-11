@@ -1,35 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-12">
+      <h1>All our Flats</h1>
+    </div>
+  </div>
 
-<h1>Flats</h1>
+  <div class="row">
+    <div class="col">
+      <% if @query %>
+        <p>You searched for <strong><%= @query %></strong>. We found <%= @flats.count %> flats out of our <%= Flat.count %> on our website.</p>
+      <% else %>
+        <p>All <%= Flat.count %> flats.</p>
+      <% end %>
+    </div>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Description</th>
-      <th>Price per night</th>
-      <th>Number of guests</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="row">
+    <div class="cards">
+      <%= render partial: @flats, locals: { as: :flat } %>
+    </div>
+  </div>
 
-  <tbody>
-    <% @flats.each do |flat| %>
-      <tr>
-        <td><%= flat.name %></td>
-        <td><%= flat.address %></td>
-        <td><%= flat.description %></td>
-        <td><%= flat.price_per_night %></td>
-        <td><%= flat.number_of_guests %></td>
-        <td><%= link_to 'Show', flat %></td>
-        <td><%= link_to 'Edit', edit_flat_path(flat) %></td>
-        <td><%= link_to 'Destroy', flat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Flat', new_flat_path %>

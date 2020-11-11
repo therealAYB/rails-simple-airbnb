@@ -1,0 +1,20 @@
+<%= simple_form_for @flat do |f| %>
+  <% if @flat.errors.any? %>
+    <div class="errors-container">
+      <ul>
+        <% @flat.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= f.input :name, class: 'form-control' %>
+    <%= f.input :address %>
+    <%= f.input :description %>
+    <%= f.input :price_per_night %>
+    <%= f.input :number_of_guests %>
+    <%= f.button :submit %>
+
+  <!-- [...] all the fields -->
+<% end %>

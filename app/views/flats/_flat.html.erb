@@ -1,0 +1,40 @@
+
+  <div class="card-flat">
+    <div class="card-flat-infos">
+        <div>
+          <%= image_tag(flat.pic_url, :class =>  "flat-card-image") %>
+        </div>
+
+      <h2><%= flat.name %></h2>
+      <p>
+        <%= flat.address %>
+      </p>
+      <div>
+        <p>
+          <span>
+            <i class="fas fa-user-friends"></i>
+            <%= flat.number_of_guests %>
+          </span>
+          <span>
+          <i class="fas fa-euro-sign"></i>
+          <%= flat.price_per_night %>
+          </span>
+        </p>
+    </div>
+
+
+    </div>
+    <div class="card-bottom">
+      <span id="more_info">
+        <%= link_to "More info", flat_path(flat) %>
+      </span>
+      <span id="edit_info">
+        <%= link_to "Edit", edit_flat_path(flat) %>
+      </span>
+      <span id="delete_info">
+        <%= link_to "Remove", flat_path(flat),
+          method: :delete,
+          data: { confirm: "Are you sure?" } %>
+      </span>
+    </div>
+  </div>

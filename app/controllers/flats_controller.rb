@@ -1,74 +1,58 @@
 class FlatsController < ApplicationController
   before_action :set_flat, only: [:show, :edit, :update, :destroy]
 
-  # GET /flats
-  # GET /flats.json
   def index
-    @flats = Flat.all
+    if params[:query].present?
+      @query = params[:query]
+      @flats = Flat.where("name iLike '%#{params[:query]}%'")
+    else
+      @flats = Flat.all
+    end
   end
 
-  # GET /flats/1
-  # GET /flats/1.json
   def show
   end
 
-  # GET /flats/new
   def new
     @flat = Flat.new
   end
 
-  # GET /flats/1/edit
-  def edit
-  end
-
-  # POST /flats
-  # POST /flats.json
   def create
     @flat = Flat.new(flat_params)
-
-    respond_to do |format|
-      if @flat.save
-        format.html { redirect_to @flat, notice: 'Flat was successfully created.' }
-        format.json { render :show, status: :created, location: @flat }
-      else
-        format.html { render :new }
-        format.json { render json: @flat.errors, status: :unprocessable_entity }
-      end
+    if @flat.save
+      redirect_to flat_path(@flat)
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /flats/1
-  # PATCH/PUT /flats/1.json
+  def edit
+
+  end
+
   def update
-    respond_to do |format|
-      if @flat.update(flat_params)
-        format.html { redirect_to @flat, notice: 'Flat was successfully updated.' }
-        format.json { render :show, status: :ok, location: @flat }
-      else
-        format.html { render :edit }
-        format.json { render json: @flat.errors, status: :unprocessable_entity }
-      end
+
+    if @flat.update(flat_params)
+      redirect_to flat_path(@flat)
+    else
+      render :edit
     end
+
   end
 
-  # DELETE /flats/1
-  # DELETE /flats/1.json
   def destroy
     @flat.destroy
-    respond_to do |format|
-      format.html { redirect_to flats_url, notice: 'Flat was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to flats_path
+
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_flat
-      @flat = Flat.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def flat_params
-      params.require(:flat).permit(:name, :address, :description, :price_per_night, :number_of_guests)
-    end
+  def flat_params
+    params.require(:flat).permit(:name, :address, :description, :price_per_night, :number_of_guests, :pic_url)
+  end
+
+  def set_flat
+    @flat = Flat.find(params[:id])
+  end
 end

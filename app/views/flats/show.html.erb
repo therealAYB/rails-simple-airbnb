@@ -1,29 +1,50 @@
-<p id="notice"><%= notice %></p>
+<div class="map" style="background-image: url('<%= @flat.pic_url %>')"></div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @flat.name %>
-</p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @flat.address %>
-</p>
+<div class="container margin-top-negative">
+  <div class="row justify-content-around flat-module">
+    <div class="col-7 flat-module-left">
 
-<p>
-  <strong>Description:</strong>
-  <%= @flat.description %>
-</p>
+      <div class="flat-module-left-title">
+        <h2><%= link_to @flat.name, flat_path(@flat) %></h2>
+        <p><%= @flat.address %></p>
+      </div>
 
-<p>
-  <strong>Price per night:</strong>
-  <%= @flat.price_per_night %>
-</p>
+      <div class="flat-module-more-info">
+        <h5>A bit more about this flat...</h5>
+        <p><%= @flat.description %></p>
+      </div>
+      <div class="flat-module-left-details">
+        <h5>Details</h5>
+        <p>
+          <span>
+            <i class="fas fa-user-friends"></i>
+            <%= @flat.number_of_guests %>
+          </span>
+          <span>
+          <i class="fas fa-euro-sign"></i>
+          <%= @flat.price_per_night %>
+          </span>
+        </p>
+      </div>
 
-<p>
-  <strong>Number of guests:</strong>
-  <%= @flat.number_of_guests %>
-</p>
-
-<%= link_to 'Edit', edit_flat_path(@flat) %> |
-<%= link_to 'Back', flats_path %>
+    </div>
+    <div class=" col-4 flat-module-right">
+      <div class="row flat-module-left-sharing">
+        <div class="col-5">
+          <p>Share</p>
+        </div>
+        <div class="col-7">
+          <p>
+            <i class="fab fa-facebook-square fa-lg"></i>
+            <i class="fab fa-twitter-square fa-lg"></i>
+            <i class="fab fa-pinterest-square fa-lg"></i>
+            <i class="fas fa-envelope-square fa-lg"></i>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p id="coordinates"></p>
+</div>
+</span>
